@@ -103,7 +103,7 @@ router.get('/', function(req, res) {
     try {
       const db = await client.db(dbName);
       //check if user exists
-      let user = await db.collection('users').findOne({username:req.body.username});
+      let user = await db.collection('users').findOne({email:req.body.email});
   
       if(user)
       {
@@ -147,9 +147,9 @@ router.get('/', function(req, res) {
         error
       })
     }
-    finally{
-      client.close()
-    }
+    // finally{
+    //   client.close()
+    // }
   });
   router.put('/edit-user/:id', async(req, res)=> {
     await client.connect();
