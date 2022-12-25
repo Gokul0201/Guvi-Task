@@ -104,7 +104,6 @@ router.get('/', function(req, res) {
       const db = await client.db(dbName);
       //check if user exists
       let user = await db.collection('users').findOne({email:req.body.email});
-  
       if(user)
       {
       //check if the password matches
@@ -113,14 +112,16 @@ router.get('/', function(req, res) {
         {
           let token = await createToken({
             username:user.username,
-            email:user.email
+            email:user.email,
+            id:user._id
             
           })
           res.send({
             statusCode: 200,
             message:"User Logged in Successfully",
             token,
-            username:user.username
+            username:user.username,
+            id:user._id
                      
           })
         }
